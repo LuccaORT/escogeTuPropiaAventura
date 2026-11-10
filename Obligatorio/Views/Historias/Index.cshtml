@@ -1,0 +1,133 @@
+@model IEnumerable<HistoriaResumenDTO>
+
+@{
+    ViewData["Title"] = "Historias";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Historias</h2>
+
+        <a asp-controller="Historias"
+           asp-action="Create"
+           class="btn btn-primary">
+            Nueva historia
+        </a>
+    </div>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No hay historias registradas.
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Sinopsis</th>
+                    <th>Categorías</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var historia in Model)
+                {
+                    <tr>
+                        <td>@historia.Id</td>
+
+                        <td>@historia.Titulo</td>
+
+                        <td>@historia.Sinopsis</td>
+
+                        <td>
+                            @if (historia.Categorias != null &&
+                                 historia.Categorias.Any())
+                            {
+                                @string.Join(", ",
+                                    historia.Categorias.Select(c => c.Nombre))
+                            }
+                            else
+                            {
+                                <span>Sin categorías</span>
+                            }
+                        </td>
+
+                        <td>
+                            @if (historia.EstaPublicada)
+                            {
+                                <span class="badge bg-success">
+                                    PUBLICADA
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+                                    BORRADOR
+                                </span>
+                            }
+                        </td>
+
+                        <td>
+                            <div class="d-flex gap-2 flex-wrap">
+
+                                <a asp-controller="Historias"
+                                   asp-action="Edit"
+                                   asp-route-id="@historia.Id"
+                                   class="btn btn-warning btn-sm">
+                                    Editar
+                                </a>
+
+                                @if (!historia.EstaPublicada)
+                                {
+                                    <a asp-controller="Historias"
+                                       asp-action="AgregarCapitulo"
+                                       asp-route-id="@historia.Id"
+                                       class="btn btn-success btn-sm">
+                                        Agregar capítulo
+                                    </a>
+                                }
+
+                                <a asp-controller="Historias"
+                                   asp-action="Delete"
+                                   asp-route-id="@historia.Id"
+                                   class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

@@ -1,0 +1,97 @@
+@{
+    string? nombreUsuario = Context.Session.GetString(ClavesSesion.NombreUsuario);
+    string? rol = Context.Session.GetString(ClavesSesion.Rol);
+    bool tieneSesion = !string.IsNullOrEmpty(Context.Session.GetString(ClavesSesion.Token));
+
+    // RF12 - Bootstrap cambia todos sus colores según este atributo.
+    // Se escribe desde el servidor para que la página nunca parpadee en claro.
+    string tema = Context.Session.GetString(ClavesSesion.Estilo) == ClavesSesion.EstiloOscuro
+        ? "dark"
+        : "light";
+}
+
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="@tema">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Escoge tu propia aventura</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Obligatorio.Lector.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-body border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Escoge tu propia aventura</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Mostrar menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (rol == ClavesSesion.RolLector)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Lecturas" asp-action="Historias">Historias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Lecturas" asp-action="Historial">Mi historial</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Preferencias" asp-action="Estilo">Estilo de lectura</a>
+                            </li>
+                        }
+                        else if (rol == ClavesSesion.RolAdministrador)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Metricas" asp-action="RankingHistorias">Historias más leídas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Metricas" asp-action="Finales">Finales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Metricas" asp-action="RankingUsuarios">Usuarios más lectores</a>
+                            </li>
+                        }
+                    </ul>
+
+                    @if (tieneSesion)
+                    {
+                        <div class="d-flex align-items-center">
+                            <span class="me-3">@nombreUsuario</span>
+
+                            <form asp-controller="Auth" asp-action="Logout" method="post">
+                                <button type="submit" class="btn btn-outline-danger">
+                                    Cerrar sesión
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - Escoge tu propia aventura
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

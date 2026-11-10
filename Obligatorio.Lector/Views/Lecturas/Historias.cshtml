@@ -1,0 +1,117 @@
+@model List<HistoriaViewModel>
+
+@{
+    ViewData["Title"] = "Historias publicadas";
+
+    var categorias = ViewBag.Categorias as List<CategoriaViewModel>
+        ?? new List<CategoriaViewModel>();
+
+    int? categoriaSeleccionada = ViewBag.CategoriaId;
+}
+
+<div class="container mt-4">
+
+    <h2>Historias publicadas</h2>
+
+    <p class="text-muted">
+        Elegí una historia para comenzar tu aventura.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    <form method="get"
+          asp-controller="Lecturas"
+          asp-action="Historias"
+          class="mb-4">
+
+        <label class="form-label">Filtrar por categoría</label>
+
+        <select name="categoriaId" class="form-select">
+            <option value="">Todas las categorías</option>
+
+            @foreach (var categoria in categorias)
+            {
+                <option value="@categoria.Id"
+                        selected="@(categoriaSeleccionada == categoria.Id)">
+                    @categoria.Nombre
+                </option>
+            }
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-2">
+            Filtrar
+        </button>
+    </form>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No hay historias publicadas para mostrar con ese filtro.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var historia in Model)
+            {
+                <div class="col-md-6 mb-3">
+                    <div class="card h-100 shadow-sm">
+
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @historia.Titulo
+                            </h5>
+
+                            <p class="card-text">
+                                @historia.Sinopsis
+                            </p>
+
+                            <p>
+                                <strong>Categorías:</strong>
+
+                                @string.Join(", ",
+                                    historia.Categorias.Select(c => c.Nombre))
+                            </p>
+                        </div>
+
+                        <div class="card-footer">
+                            <form asp-controller="Lecturas"
+                                  asp-action="Iniciar"
+                                  method="post">
+
+                                <input type="hidden"
+                                       name="historiaId"
+                                       value="@historia.Id" />
+
+                                <button type="submit"
+                                        class="btn btn-success w-100">
+                                    Comenzar lectura
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-outline-secondary mt-3">
+        Volver al inicio
+    </a>
+
+</div>

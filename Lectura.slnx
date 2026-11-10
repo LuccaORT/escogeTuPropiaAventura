@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Dominio/Dominio.csproj" />
+  <Project Path="Aplicacion/Aplicacion.csproj" />
+  <Project Path="Infraestructura/Infraestructura.csproj" />
+  <Project Path="Obligatorio.WebApi/Obligatorio.WebApi.csproj" />
+  <Project Path="Obligatorio.Lector/Obligatorio.Lector.csproj" />
+</Solution>

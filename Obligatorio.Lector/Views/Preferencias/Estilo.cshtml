@@ -1,0 +1,99 @@
+@model EstiloLecturaViewModel
+
+@{
+    ViewData["Title"] = "Estilo de lectura";
+
+    var estilos = new[]
+    {
+        (Valor: ClavesSesion.EstiloClaro, Nombre: "Claro", Tema: "light",
+         Descripcion: "Fondo claro y letra oscura. Cómodo con buena luz."),
+        (Valor: ClavesSesion.EstiloOscuro, Nombre: "Oscuro", Tema: "dark",
+         Descripcion: "Fondo oscuro y letra clara. Cómodo con poca luz.")
+    };
+}
+
+<div class="container mt-4">
+
+    <h2>Estilo de lectura</h2>
+
+    <p class="text-muted">
+        Elegí cómo querés ver las historias. Queda guardado en tu usuario.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    <form asp-controller="Preferencias"
+          asp-action="Estilo"
+          method="post">
+
+        <div class="row g-4 mb-4">
+            @foreach (var estilo in estilos)
+            {
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input"
+                                       type="radio"
+                                       name="estilo"
+                                       id="estilo-@estilo.Valor"
+                                       value="@estilo.Valor"
+                                       checked="@(Model.Estilo == estilo.Valor)"
+                                       required />
+
+                                <label class="form-check-label fw-bold"
+                                       for="estilo-@estilo.Valor">
+                                    @estilo.Nombre
+                                </label>
+                            </div>
+
+                            <p>@estilo.Descripcion</p>
+
+                            @* Vista previa: el tema se puede aplicar a un solo elemento *@
+                            <div data-bs-theme="@estilo.Tema"
+                                 class="bg-body text-body border rounded p-3">
+                                <h5>El bosque</h5>
+                                <p>Dos senderos se abren frente a vos.</p>
+                                <span class="btn btn-primary btn-sm pe-none">
+                                    Tomar el de la izquierda
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Guardar estilo
+        </button>
+
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="btn btn-outline-secondary">
+            Volver al inicio
+        </a>
+    </form>
+
+</div>

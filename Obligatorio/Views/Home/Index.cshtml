@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="container mt-4">
+
+    <div class="text-center mb-5">
+        <h1 class="display-6">Administración de historias</h1>
+
+        <p class="lead text-muted">
+            Bienvenido, @User.Identity?.Name.
+        </p>
+    </div>
+
+    <div class="row justify-content-center g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <h3 class="h4">Historias</h3>
+                    <p>Crear, editar y publicar historias y sus capítulos.</p>
+                    <a asp-controller="Historias" asp-action="Index" class="btn btn-primary">
+                        Ver historias
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <h3 class="h4">Usuarios</h3>
+                    <p>Dar de alta administradores y lectores.</p>
+                    <a asp-controller="Usuarios" asp-action="Create" class="btn btn-primary">
+                        Alta de usuario
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                    <h3 class="h4">Auditoría</h3>
+                    <p>Consultar quién hizo cada cambio y cuándo.</p>
+                    <a asp-controller="Auditorias" asp-action="Index" class="btn btn-primary">
+                        Ver auditoría
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

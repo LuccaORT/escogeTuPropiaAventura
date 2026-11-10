@@ -1,0 +1,62 @@
+@model List<RankingHistoriaViewModel>
+
+@{
+    ViewData["Title"] = "Historias más leídas";
+}
+
+<div class="container mt-4">
+
+    <h2>Historias más leídas</h2>
+
+    <p class="text-muted">
+        Ordenadas por lecturas completadas. Las historias que nadie
+        terminó de leer no aparecen.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+    else if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Todavía no hay lecturas completadas.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Historia</th>
+                        <th>Lecturas completadas</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model[i].Titulo</td>
+                            <td>@Model[i].LecturasCompletadas</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-outline-secondary mt-3">
+        Volver al inicio
+    </a>
+
+</div>

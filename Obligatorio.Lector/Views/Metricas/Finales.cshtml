@@ -1,0 +1,100 @@
+@model FinalesHistoriaViewModel?
+
+@{
+    ViewData["Title"] = "Final más alcanzado";
+
+    var historias = ViewBag.Historias as List<HistoriaViewModel>
+        ?? new List<HistoriaViewModel>();
+
+    int? historiaSeleccionada = ViewBag.HistoriaId;
+}
+
+<div class="container mt-4">
+
+    <h2>Final más alcanzado por historia</h2>
+
+    <p class="text-muted">
+        Elegí una historia para ver cuántas veces se alcanzó cada final.
+    </p>
+
+    <form method="get"
+          asp-controller="Metricas"
+          asp-action="Finales"
+          class="mb-4">
+
+        <label class="form-label" for="historiaId">Historia</label>
+
+        <select id="historiaId" name="historiaId" class="form-select" required>
+            <option value="">Seleccioná una historia</option>
+
+            @foreach (var historia in historias)
+            {
+                <option value="@historia.Id"
+                        selected="@(historiaSeleccionada == historia.Id)">
+                    @historia.Titulo
+                </option>
+            }
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-2">
+            Ver finales
+        </button>
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+    else if (Model != null)
+    {
+        <h4 class="mb-3">@Model.HistoriaTitulo</h4>
+
+        @if (Model.Finales.All(f => f.VecesAlcanzado == 0))
+        {
+            <div class="alert alert-info">
+                Todavía nadie llegó a un final de esta historia.
+            </div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Final</th>
+                        <th>Veces alcanzado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var final in Model.Finales)
+                    {
+                        <tr>
+                            <td>
+                                @final.Titulo
+
+                                @if (final.EsMasFrecuente)
+                                {
+                                    <span class="badge bg-success ms-2">
+                                        Más frecuente
+                                    </span>
+                                }
+                            </td>
+                            <td>@final.VecesAlcanzado</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-outline-secondary mt-3">
+        Volver al inicio
+    </a>
+
+</div>

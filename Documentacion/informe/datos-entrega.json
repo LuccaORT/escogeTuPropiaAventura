@@ -1,0 +1,13 @@
+{
+  "enlaces": {
+    "administracion": "http://escogetuaventura.somee.com/admin/",
+    "lectura": "http://escogetuaventura.somee.com/",
+    "api": "http://escogetuaventura.somee.com/webapi/swagger",
+    "github": ""
+  },
+  "ia": {
+    "herramienta": "Claude Sonnet 5.5 (claude.ai)",
+    "linkPrompts": "https://claude.ai/chat/87aba87b-fb80-4dd8-bd84-94a97438f96d",
+    "captura": "img/captura-prompts.png"
+  }
+}

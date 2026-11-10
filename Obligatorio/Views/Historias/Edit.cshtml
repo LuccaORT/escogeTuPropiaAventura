@@ -1,0 +1,237 @@
+@model HistoriaDetalleDTO
+
+@{
+    ViewData["Title"] = "Editar historia";
+
+    var categorias = ViewBag.Categorias as IEnumerable<CategoriaDTO>
+        ?? Enumerable.Empty<CategoriaDTO>();
+
+    var categoriasSeleccionadas = Model.Categorias
+        .Select(c => c.Id)
+        .ToList();
+}
+
+<div class="container mt-4">
+
+    <h2>Editar historia</h2>
+
+    <p class="text-muted">
+        Modifique los datos de la historia.
+    </p>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    <form asp-controller="Historias"
+          asp-action="Edit"
+          method="post">
+
+        <input type="hidden"
+               name="id"
+               value="@Model.Id" />
+
+        <div class="mb-3">
+            <label class="form-label">
+                Título
+            </label>
+
+            <input type="text"
+                   name="titulo"
+                   value="@Model.Titulo"
+                   class="form-control"
+                   maxlength="200"
+                   required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                Sinopsis
+            </label>
+
+            <textarea name="sinopsis"
+                      class="form-control"
+                      rows="4"
+                      maxlength="2000"
+                      required>@Model.Sinopsis</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                Categorías
+            </label>
+
+            @foreach (var categoria in categorias)
+            {
+                <div class="form-check">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="categoriasIds"
+                           value="@categoria.Id"
+                           id="categoria_@categoria.Id"
+                           checked="@categoriasSeleccionadas.Contains(categoria.Id)" />
+
+                    <label class="form-check-label"
+                           for="categoria_@categoria.Id">
+                        @categoria.Nombre
+                    </label>
+
+                </div>
+            }
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                Estado
+            </label>
+
+            <select name="estado"
+                    class="form-select">
+
+                <option value="BORRADOR"
+                        selected="@(!Model.EstaPublicada)">
+                    BORRADOR
+                </option>
+
+                <option value="PUBLICADA"
+                        selected="@Model.EstaPublicada">
+                    PUBLICADA
+                </option>
+
+            </select>
+        </div>
+
+        <hr />
+
+        <h4>Capítulo inicial</h4>
+
+        @if (Model.PuedeEditarCapituloInicial)
+        {
+            <p class="text-muted">
+                Puede modificar el capítulo inicial porque todavía
+                no se agregaron otros capítulos.
+            </p>
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Título del capítulo
+                </label>
+
+                <input type="text"
+                       name="tituloCapituloInicial"
+                       value="@Model.CapituloInicial?.Titulo"
+                       class="form-control"
+                       maxlength="200"
+                       required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Texto del capítulo
+                </label>
+
+                <textarea name="textoCapituloInicial"
+                          class="form-control"
+                          rows="6"
+                          required>@Model.CapituloInicial?.Texto</textarea>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-secondary">
+                El capítulo inicial no puede modificarse porque
+                la historia ya tiene otros capítulos.
+            </div>
+        }
+
+        <button type="submit"
+                class="btn btn-primary">
+            Guardar cambios
+        </button>
+
+        <a asp-controller="Historias"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+
+    <hr class="my-4" />
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">Capítulos de la historia</h4>
+
+        @if (!Model.EstaPublicada)
+        {
+            <a asp-controller="Historias"
+               asp-action="AgregarCapitulo"
+               asp-route-id="@Model.Id"
+               class="btn btn-success btn-sm">
+                Agregar capítulo
+            </a>
+        }
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Tipo</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var capitulo in Model.Capitulos)
+                {
+                    <tr>
+                        <td>
+                            @capitulo.Titulo
+
+                            @if (capitulo.Id == Model.CapituloInicial?.Id)
+                            {
+                                <span class="badge bg-primary">Inicial</span>
+                            }
+                        </td>
+
+                        <td>@capitulo.Tipo</td>
+
+                        <td>
+                            @if (capitulo.Tipo == CapituloDTO.TipoFinal)
+                            {
+                                <span class="text-muted">No tiene opciones</span>
+                            }
+                            else if (!capitulo.Opciones.Any())
+                            {
+                                <span class="text-danger">Sin opciones todavía</span>
+                            }
+                            else
+                            {
+                                <ul class="mb-0">
+                                    @foreach (var opcion in capitulo.Opciones)
+                                    {
+                                        <li>@opcion.Texto → @opcion.DestinoTitulo</li>
+                                    }
+                                </ul>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

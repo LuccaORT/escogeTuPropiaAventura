@@ -1,0 +1,738 @@
+{
+  "categorias": [
+    "Fantasía",
+    "Ciencia ficción",
+    "Misterio",
+    "Terror",
+    "Aventura histórica",
+    "Romance",
+    "Humor",
+    "Suspenso",
+    "Leyendas urbanas",
+    "Exploración"
+  ],
+  "usuarios": [
+    {
+      "nombreCompleto": "Martina Echeverría",
+      "email": "admin1@aventura.example",
+      "nombreUsuario": "admin1",
+      "contrasena": "Admin123!",
+      "rol": "ADMINISTRADOR",
+      "estilo": "OSCURO"
+    },
+    {
+      "nombreCompleto": "Joaquín Pereyra",
+      "email": "admin2@aventura.example",
+      "nombreUsuario": "admin2",
+      "contrasena": "Admin123!",
+      "rol": "ADMINISTRADOR",
+      "estilo": "CLARO"
+    },
+    {
+      "nombreCompleto": "Camila Rodríguez",
+      "email": "lector1@aventura.example",
+      "nombreUsuario": "lector1",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "CLARO"
+    },
+    {
+      "nombreCompleto": "Bruno Techera",
+      "email": "nuevo@aventura.example",
+      "nombreUsuario": "nuevo",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "OSCURO"
+    },
+    {
+      "nombreCompleto": "Valentina Sosa",
+      "email": "lector2@aventura.example",
+      "nombreUsuario": "lector2",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "OSCURO"
+    },
+    {
+      "nombreCompleto": "Facundo Olivera",
+      "email": "lector3@aventura.example",
+      "nombreUsuario": "lector3",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "CLARO"
+    },
+    {
+      "nombreCompleto": "Lucía Barreto",
+      "email": "lector4@aventura.example",
+      "nombreUsuario": "lector4",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "CLARO"
+    },
+    {
+      "nombreCompleto": "Matías Cabrera",
+      "email": "lector5@aventura.example",
+      "nombreUsuario": "lector5",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "OSCURO"
+    },
+    {
+      "nombreCompleto": "Florencia Giménez",
+      "email": "lector6@aventura.example",
+      "nombreUsuario": "lector6",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "OSCURO"
+    },
+    {
+      "nombreCompleto": "Santiago Methol",
+      "email": "lector7@aventura.example",
+      "nombreUsuario": "lector7",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "CLARO"
+    },
+    {
+      "nombreCompleto": "Agustina Larrosa",
+      "email": "lector8@aventura.example",
+      "nombreUsuario": "lector8",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "CLARO"
+    },
+    {
+      "nombreCompleto": "Nicolás Duarte",
+      "email": "lector9@aventura.example",
+      "nombreUsuario": "lector9",
+      "contrasena": "Lector123!",
+      "rol": "LECTOR",
+      "estilo": "OSCURO"
+    }
+  ],
+  "historias": [
+    {
+      "clave": "faro-que-no-se-apaga",
+      "titulo": "El faro que no se apaga",
+      "estado": "PUBLICADA",
+      "admin": "admin1",
+      "creada": "2026-07-06T10:00:00",
+      "categorias": ["Fantasía", "Misterio"],
+      "sinopsis": "Llegás a una isla remota para ocupar el puesto de farero y descubrís que el faro ya está encendido, y que su luz tiene voluntad propia. Entre una lámpara viva y un pozo lleno de reflejos, tus decisiones determinan quién va a cuidar la luz.",
+      "capitulos": [
+        {
+          "clave": "faro-inicio",
+          "titulo": "La luz de medianoche",
+          "texto": "Llegás a la isla de Cuarzo para reemplazar al farero, pero el faro ya está encendido sin que nadie lo haya prendido. En la escalera encontrás un cuaderno con tu nombre, donde alguien anotó lo que vas a hacer antes de que lo hagas.",
+          "opciones": [
+            { "texto": "Subir hasta la lámpara y enfrentar la luz", "destino": "faro-lampara" },
+            { "texto": "Bajar al sótano, de donde sale un murmullo", "destino": "faro-sotano" }
+          ]
+        },
+        {
+          "clave": "faro-lampara",
+          "titulo": "La lámpara viva",
+          "texto": "La luz resulta ser una criatura de vidrio y fuego que te estudia con paciencia. Te ofrece un trato: ocupar su lugar a cambio de que los barcos nunca más se pierdan.",
+          "opciones": [
+            { "texto": "Aceptar el trato de la criatura", "destino": "faro-final-guardian" },
+            { "texto": "Romper el cristal que la sostiene", "destino": "faro-final-oscuridad" }
+          ]
+        },
+        {
+          "clave": "faro-sotano",
+          "titulo": "El murmullo del sótano",
+          "texto": "Abajo hay un pozo de agua quieta donde se reflejan los faros de otros mundos. Una voz de mujer dice que fue la farera anterior y que lleva años atrapada.",
+          "opciones": [
+            { "texto": "Meter la mano en el pozo para sacarla", "destino": "faro-final-farera" },
+            { "texto": "Cerrar la tapa del pozo y volver a subir", "destino": "faro-final-isla" }
+          ]
+        },
+        {
+          "clave": "faro-final-guardian",
+          "titulo": "Final: El nuevo guardián",
+          "texto": "Tu cuerpo se vuelve luz y desde la costa los barcos ven una estrella constante que los guía a puerto. Nadie vuelve a saber de vos, pero ningún naufragio ocurre en esas aguas.",
+          "final": true
+        },
+        {
+          "clave": "faro-final-oscuridad",
+          "titulo": "Final: La noche sin luz",
+          "texto": "El cristal estalla y el faro se apaga por primera vez en siglos. Tenés que remar de noche en un mar sin guía, y a lo lejos otras luces sin dueño empiezan a encenderse.",
+          "final": true
+        },
+        {
+          "clave": "faro-final-farera",
+          "titulo": "Final: La farera libre",
+          "texto": "Tirás del agua y una mujer vieja sale del pozo, riéndose y empapada. Te regala las llaves del faro, y se va en el primer bote con el cuaderno bajo el brazo.",
+          "final": true
+        },
+        {
+          "clave": "faro-final-isla",
+          "titulo": "Final: Una isla que se olvida",
+          "texto": "Cerrás la tapa y subís sin mirar atrás. Al amanecer el faro está apagado, el cuaderno en blanco, y no recordás para qué habías venido a la isla.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "estacion-orion-9",
+      "titulo": "Estación Orión-9",
+      "estado": "PUBLICADA",
+      "admin": "admin2",
+      "creada": "2026-07-12T16:30:00",
+      "categorias": ["Ciencia ficción"],
+      "sinopsis": "Despertás en una estación orbital que parece abandonada y descubrís que pasaron once años. Una señal misteriosa llega desde el planeta de abajo, y de lo que hagas depende si la estación vuelve a la vida o queda para siempre en silencio.",
+      "capitulos": [
+        {
+          "clave": "orion-inicio",
+          "titulo": "Despertar en hibernación",
+          "texto": "Abrís los ojos dentro de la cámara de hibernación y la voz de la estación te informa que pasaron once años desde tu último ciclo. Las luces de emergencia parpadean y no hay nadie en los pasillos.",
+          "opciones": [
+            { "texto": "Ir a la sala de control para entender qué pasó", "destino": "orion-control" },
+            { "texto": "Correr hasta la cápsula de escape", "destino": "orion-final-capsula" }
+          ]
+        },
+        {
+          "clave": "orion-control",
+          "titulo": "Registros de la tripulación",
+          "texto": "En el panel se repite un mensaje: la tripulación bajó al planeta tras recibir una señal que decía su nombre. La señal sigue llegando, más fuerte cada hora.",
+          "opciones": [
+            { "texto": "Responder la señal con el transmisor", "destino": "orion-final-voz" },
+            { "texto": "Apagar la antena y borrar el registro", "destino": "orion-final-silencio" }
+          ]
+        },
+        {
+          "clave": "orion-final-voz",
+          "titulo": "Final: Voz desde abajo",
+          "texto": "Del otro lado contesta tu propia tripulación, sana y salva, que construyó una ciudad en la superficie. Te invitan a bajar y empezás a empacar con una sonrisa.",
+          "final": true
+        },
+        {
+          "clave": "orion-final-silencio",
+          "titulo": "Final: Silencio en órbita",
+          "texto": "Apagás la antena y la estación queda en calma. Te quedás flotando entre las estrellas con la duda eterna de qué habría pasado si hubieras respondido.",
+          "final": true
+        },
+        {
+          "clave": "orion-final-capsula",
+          "titulo": "Final: Regreso a casa con las manos vacías",
+          "texto": "La cápsula te devuelve a la Tierra, donde nadie recuerda la estación ni a tu tripulación. Vivís el resto de tus días mirando el cielo con la sensación de haber dejado algo atrás.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "casa-calle-sauce",
+      "titulo": "La casa de la calle Sauce",
+      "estado": "PUBLICADA",
+      "admin": "admin1",
+      "creada": "2026-08-10T22:05:00",
+      "categorias": ["Terror"],
+      "sinopsis": "Heredás una casa antigua donde todos los relojes están detenidos a las 3:07. Podés venderla sin entrar o pasar una noche entre sus paredes, y cada decisión te acerca más a lo que la casa lleva años esperando.",
+      "capitulos": [
+        {
+          "clave": "sauce-inicio",
+          "titulo": "Herencia en la calle Sauce",
+          "texto": "Tu tía abuela te dejó una casa vieja donde todos los relojes están parados a las 3:07. El escribano te avisa que podés vender sin entrar, pero la llave pesa en tu bolsillo como si te llamara.",
+          "opciones": [
+            { "texto": "Pasar la noche en la casa para conocerla", "destino": "sauce-noche" },
+            { "texto": "Firmar la venta sin cruzar la puerta", "destino": "sauce-final-venta" }
+          ]
+        },
+        {
+          "clave": "sauce-noche",
+          "titulo": "A las 3:07",
+          "texto": "Los relojes arrancan todos a la vez y de la cocina sale olor a lluvia, como si alguien hubiera entrado empapado. En el pasillo se escuchan pasos mojados que suben hacia el altillo.",
+          "opciones": [
+            { "texto": "Seguir los pasos hasta el altillo", "destino": "sauce-final-altillo" },
+            { "texto": "Encerrarte en el baño y esperar al amanecer", "destino": "sauce-final-casa" }
+          ]
+        },
+        {
+          "clave": "sauce-final-altillo",
+          "titulo": "Final: Lo que guardaba el altillo",
+          "texto": "Arriba hay un baúl con cartas de tu tía abuela dirigidas a vos, escritas antes de que nacieras. La última está fechada mañana y describe exactamente lo que estás sintiendo ahora.",
+          "final": true
+        },
+        {
+          "clave": "sauce-final-casa",
+          "titulo": "Final: La casa se queda con vos",
+          "texto": "Pasás la noche contra la puerta escuchando cómo alguien arrastra una silla del otro lado. Al amanecer salís sin dar vuelta la cabeza, pero desde entonces todos tus relojes se detienen a las 3:07.",
+          "final": true
+        },
+        {
+          "clave": "sauce-final-venta",
+          "titulo": "Final: Vendida sin mirar atrás",
+          "texto": "Firmás los papeles en la vereda y te vas con el dinero. Meses después, el nuevo dueño te manda una sola foto: la ventana del altillo, con alguien parado que se te parece.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "pliego-de-la-cuchilla",
+      "titulo": "El pliego de la cuchilla",
+      "estado": "PUBLICADA",
+      "admin": "admin2",
+      "creada": "2026-07-18T11:20:00",
+      "categorias": ["Aventura histórica"],
+      "sinopsis": "A fines del siglo XVIII, un joven postillón lleva un pliego sellado por caminos de tierra, arroyos crecidos y pulperías sospechosas. Cada decisión puede cambiar el destino de un mensaje que alguien quiere que nunca llegue.",
+      "capitulos": [
+        {
+          "clave": "pliego-inicio",
+          "titulo": "El pliego lacrado",
+          "texto": "Te entregan un pliego lacrado en la posta y te dicen que tiene que llegar a Montevideo antes del domingo. Apenas salís, un jinete de poncho oscuro se cruza en tu camino y mira demasiado tu alforja.",
+          "opciones": [
+            { "texto": "Pasar al galope por la cuchilla del norte", "destino": "pliego-cuchilla" },
+            { "texto": "Tomar el camino de las pulperías, más largo pero más concurrido", "destino": "pliego-pulperia" }
+          ]
+        },
+        {
+          "clave": "pliego-cuchilla",
+          "titulo": "La cuchilla en tormenta",
+          "texto": "El cielo se vuelve negro y el viento te echa tierra en los ojos. Al pie de la loma el arroyo bajó con la lluvia y el vado desapareció.",
+          "opciones": [
+            { "texto": "Cruzar el arroyo a caballo, aunque la corriente se lleve todo", "destino": "pliego-final-deber" }
+          ]
+        },
+        {
+          "clave": "pliego-pulperia",
+          "titulo": "La pulpería del Cardal",
+          "texto": "Adentro, el jinete del poncho ya te espera con dos vasos servidos y una sonrisa de ofrecimiento. El pulpero te mira fijo y niega con la cabeza, como avisándote.",
+          "opciones": [
+            { "texto": "Aceptar la copa y escuchar la oferta", "destino": "pliego-final-trato" }
+          ]
+        },
+        {
+          "clave": "pliego-final-deber",
+          "titulo": "Final: El pliego mojado, el deber cumplido",
+          "texto": "Llegás empapado y con el caballo agotado, pero el lacre resiste. El comandante lee el pliego y te nombra mensajero de confianza delante de toda la guardia.",
+          "final": true
+        },
+        {
+          "clave": "pliego-final-trato",
+          "titulo": "Final: Un trato de pulpería",
+          "texto": "Bebés lo que te sirven y a la mañana despertás sin la alforja ni el caballo. Con el tiempo te enterás de que el pliego llegó con otra firma, y nunca vas a poder probar lo que pasó.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "carta-tren-de-las-siete",
+      "titulo": "Carta en el tren de las siete",
+      "estado": "PUBLICADA",
+      "admin": "admin1",
+      "creada": "2026-07-30T15:10:00",
+      "categorias": ["Romance"],
+      "sinopsis": "Todos los días encontrás una carta olvidada en el mismo asiento del tren, escrita a mano y sin firma. Contestarla puede ser el comienzo de algo lindo o de una historia que prefiere quedarse en el papel.",
+      "capitulos": [
+        {
+          "clave": "carta-inicio",
+          "titulo": "El asiento 14",
+          "texto": "Todos los días tomás el mismo tren y siempre hay una carta sin firma en el asiento 14. Hoy la nueva termina diciendo que, si querés contestar, dejes tu respuesta ahí mismo.",
+          "opciones": [
+            { "texto": "Escribir una respuesta y dejarla en el asiento", "destino": "carta-respuestas" },
+            { "texto": "Quedarte en el vagón para ver quién viene a buscarla", "destino": "carta-final-funcion" }
+          ]
+        },
+        {
+          "clave": "carta-respuestas",
+          "titulo": "Respuestas en papel",
+          "texto": "Durante semanas las cartas se vuelven más largas, más graciosas y más sinceras. Una mañana la última dice que el remitente se baja en la estación del puerto y que sería lindo conocerte ahí.",
+          "opciones": [
+            { "texto": "Bajarte en el puerto con una flor en la mano", "destino": "carta-final-puerto" },
+            { "texto": "Seguir escribiendo y no bajarte nunca", "destino": "carta-final-papel" }
+          ]
+        },
+        {
+          "clave": "carta-final-puerto",
+          "titulo": "Final: Estación del puerto",
+          "texto": "En el andén hay alguien de tu edad con tinta en los dedos y la misma flor en la solapa. Se ríen de los nervios y se van a tomar un café que dura hasta la noche.",
+          "final": true
+        },
+        {
+          "clave": "carta-final-papel",
+          "titulo": "Final: Cartas para siempre",
+          "texto": "Seguís intercambiando cartas durante años sin conocer su cara, y cada una te alcanza para seguir. Algunas historias de amor funcionan mejor en papel, y esta es una de ellas.",
+          "final": true
+        },
+        {
+          "clave": "carta-final-funcion",
+          "titulo": "Final: Una función con entradas de regalo",
+          "texto": "Quien llega a buscar la carta es una actriz de una compañía de teatro que deja mensajes para que nadie viaje solo. Te regala dos entradas, y en la función conocés a alguien que te hace reír toda la noche.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "gato-contador-barrio-sur",
+      "titulo": "El gato contador de Barrio Sur",
+      "estado": "PUBLICADA",
+      "admin": "admin2",
+      "creada": "2026-08-06T10:30:00",
+      "categorias": ["Humor"],
+      "sinopsis": "Heredás una rotisería de barrio y descubrís que las cuentas las llevaba un gato naranja que suma con las patas. Un día el gato entra en huelga, y vos tenés que decidir entre negociar con él o hacerte cargo de los números.",
+      "capitulos": [
+        {
+          "clave": "gato-inicio",
+          "titulo": "Un gato en la contabilidad",
+          "texto": "Heredás una rotisería de barrio y descubrís que las cuentas las llevaba un gato naranja llamado Contador. Esta mañana el gato se declara en huelga y se sienta sobre la caja registradora.",
+          "opciones": [
+            { "texto": "Negociar con una lata de atún premium", "destino": "gato-negociacion" },
+            { "texto": "Intentar hacer las cuentas vos solo", "destino": "gato-matematica" }
+          ]
+        },
+        {
+          "clave": "gato-negociacion",
+          "titulo": "Negociaciones felinas",
+          "texto": "El gato acepta el atún, pero exige además un sillón nuevo y un aumento de sueldo en croquetas. Cada vez que suena la maquinita de las tarjetas, bufa como si lo estuvieran insultando.",
+          "opciones": [
+            { "texto": "Firmar el contrato con la huella de su pata", "destino": "gato-final-contrato" }
+          ]
+        },
+        {
+          "clave": "gato-matematica",
+          "titulo": "Matemática de emergencia",
+          "texto": "Después de dos horas obtenés tres resultados distintos para la misma suma, mientras el gato te mira con una lástima enorme. Un proveedor llega con una factura imposible y el gato la rompe de un zarpazo.",
+          "opciones": [
+            { "texto": "Pedirle perdón al gato y ofrecerle un ascenso", "destino": "gato-final-gerente" }
+          ]
+        },
+        {
+          "clave": "gato-final-contrato",
+          "titulo": "Final: Contrato de patas",
+          "texto": "La rotisería se hace famosa en el barrio por tener un gerente de cuatro patas. Las cuentas cierran perfecto, aunque cada tanto aparece un gasto misterioso que dice «ratones de peluche».",
+          "final": true
+        },
+        {
+          "clave": "gato-final-gerente",
+          "titulo": "Final: Gerente general",
+          "texto": "El gato acepta, se sube a un banquito y empieza a dar órdenes con la cola. Vos terminás atendiendo el mostrador, feliz, y las cuentas nunca estuvieron tan claras ni los clientes tan confundidos.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "ultima-llamada-de-la-noche",
+      "titulo": "La última llamada de la noche",
+      "estado": "PUBLICADA",
+      "admin": "admin1",
+      "creada": "2026-08-22T20:00:00",
+      "categorias": ["Suspenso"],
+      "sinopsis": "Sos operadora nocturna de una línea de ayuda y a las dos de la mañana entra una llamada que susurra tu dirección. Tenés diez minutos para decidir en quién confiar antes de que alguien llegue a buscarte.",
+      "capitulos": [
+        {
+          "clave": "llamada-inicio",
+          "titulo": "Número desconocido",
+          "texto": "A las dos de la mañana entra una llamada en la que alguien susurra tu dirección. Dice que tenés diez minutos antes de que «ellos» lleguen.",
+          "opciones": [
+            { "texto": "Mantener la calma y seguir hablando con la voz", "destino": "llamada-diez-minutos" },
+            { "texto": "Cortar y llamar a la policía", "destino": "llamada-final-patrulleros" }
+          ]
+        },
+        {
+          "clave": "llamada-diez-minutos",
+          "titulo": "Diez minutos",
+          "texto": "La voz dice que vio a tu compañero de turno entrar al archivo con una llave que no le pertenece. En el monitor, la luz de esa oficina está encendida.",
+          "opciones": [
+            { "texto": "Ir hasta el archivo con una linterna", "destino": "llamada-final-llave" },
+            { "texto": "Encerrarte en tu cabina y vigilar las cámaras", "destino": "llamada-final-camaras" }
+          ]
+        },
+        {
+          "clave": "llamada-final-llave",
+          "titulo": "Final: La llave equivocada",
+          "texto": "En el archivo encontrás a tu compañero quemando carpetas de llamadas viejas, y entre ellas la tuya de hace años. Lo enfrentás con el celular grabando, y cuando llegan los patrulleros ya tenés todo registrado.",
+          "final": true
+        },
+        {
+          "clave": "llamada-final-camaras",
+          "titulo": "Final: Lo que vieron las cámaras",
+          "texto": "Mirás a tu compañero sacar una caja, subirse a un auto y desaparecer. La voz vuelve a llamar solo para decir «gracias por no salir», y nunca descubrís quién era.",
+          "final": true
+        },
+        {
+          "clave": "llamada-final-patrulleros",
+          "titulo": "Final: Patrulleros sin sirena",
+          "texto": "Los policías llegan rápido pero no encuentran nada: ni compañero, ni llave, ni registro de la llamada. A la mañana tu supervisor te pide la renuncia con una amabilidad que da escalofríos.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "taxi-bajo-el-puente",
+      "titulo": "El taxi bajo el puente de la rambla",
+      "estado": "PUBLICADA",
+      "admin": "admin2",
+      "creada": "2026-09-03T17:40:00",
+      "categorias": ["Leyendas urbanas"],
+      "sinopsis": "En el barrio se cuenta que bajo el viejo puente de la rambla aparece un taxi sin patente que lleva a quien lo para a un lugar de su pasado. Una noche de lluvia, el taxi frena frente a vos.",
+      "capitulos": [
+        {
+          "clave": "taxi-inicio",
+          "titulo": "La luz azul bajo el puente",
+          "texto": "Dicen que bajo el puente de la rambla vive un taxi fantasma que lleva a quien lo para a «el lugar donde dejaste algo». Una noche de lluvia, un taxi sin patente frena delante tuyo y el conductor abre la puerta sin mirarte.",
+          "opciones": [
+            { "texto": "Subirte al taxi", "destino": "taxi-viaje" },
+            { "texto": "Seguir caminando bajo la lluvia", "destino": "taxi-final-noSubio" }
+          ]
+        },
+        {
+          "clave": "taxi-viaje",
+          "titulo": "El viaje sin semáforos",
+          "texto": "El taxi recorre calles que no existen mientras la radio nombra recuerdos que creías olvidados. El conductor dice que tenés que elegir entre volver a lo que perdiste o regresar a tu casa.",
+          "opciones": [
+            { "texto": "Pedirle que te lleve a lo que perdiste", "destino": "taxi-final-perdido" },
+            { "texto": "Pedirle que te devuelva a tu casa", "destino": "taxi-final-casa" }
+          ]
+        },
+        {
+          "clave": "taxi-final-perdido",
+          "titulo": "Final: El lugar donde dejaste algo",
+          "texto": "Te baja frente a la casa de tu infancia, con la luz de la cocina encendida y alguien esperándote con mate. Cuando mirás atrás ya no hay taxi, y en el bolsillo aparece el llavero que perdiste de chico.",
+          "final": true
+        },
+        {
+          "clave": "taxi-final-casa",
+          "titulo": "Final: La puerta de siempre",
+          "texto": "El taxi te deja en tu cuadra, pero el reloj de tu casa marca la misma hora que cuando saliste. Nadie recuerda que te fuiste, y jurás no volver a pasar por la rambla de noche.",
+          "final": true
+        },
+        {
+          "clave": "taxi-final-noSubio",
+          "titulo": "Final: El que no subió",
+          "texto": "Caminás hasta la parada y esperás el ómnibus con el corazón en la boca. A la mañana el diario cuenta que apareció un taxi sin patente abandonado bajo el puente, con la puerta abierta y el asiento todavía tibio.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "cerro-del-eco",
+      "titulo": "Expedición al Cerro del Eco",
+      "estado": "PUBLICADA",
+      "admin": "admin1",
+      "creada": "2026-09-14T09:15:00",
+      "categorias": ["Exploración"],
+      "sinopsis": "Sos geóloga de un pequeño grupo que quiere mapear un cerro donde las voces rebotan con minutos de retraso. Cañones, puentes viejos y cuevas llenas de ecos te esperan, y cada ruta guarda un descubrimiento distinto.",
+      "capitulos": [
+        {
+          "clave": "cerro-inicio",
+          "titulo": "Base del Cerro del Eco",
+          "texto": "Sos geóloga y tu grupo quiere mapear un cerro donde las voces rebotan con minutos de retraso. A mitad de la subida encontrás dos senderos: uno bordea un cañón y el otro entra en una cueva.",
+          "opciones": [
+            { "texto": "Seguir por el borde del cañón", "destino": "cerro-canon" },
+            { "texto": "Entrar a la cueva con las linternas", "destino": "cerro-final-voces" }
+          ]
+        },
+        {
+          "clave": "cerro-canon",
+          "titulo": "El borde del cañón",
+          "texto": "El viento sopla fuerte y desde el fondo sube tu propia voz, diciendo cosas que todavía no dijiste. Un puente de cuerda cruza el cañón, viejo pero entero.",
+          "opciones": [
+            { "texto": "Cruzar el puente de cuerda", "destino": "cerro-final-cima" },
+            { "texto": "Bajar por la pared hasta el fondo", "destino": "cerro-final-rio" }
+          ]
+        },
+        {
+          "clave": "cerro-final-cima",
+          "titulo": "Final: La cima sin eco",
+          "texto": "En la cima el silencio es total y el mapa se completa por primera vez. Plantás una bandera de tela y volvés con datos que cambian el atlas de la región.",
+          "final": true
+        },
+        {
+          "clave": "cerro-final-rio",
+          "titulo": "Final: El río del fondo",
+          "texto": "Abajo corre un río claro que ninguna foto aérea había registrado. Pasás la noche anotando todo lo que ves y decidís no revelar el punto exacto, para que siga siendo tuyo.",
+          "final": true
+        },
+        {
+          "clave": "cerro-final-voces",
+          "titulo": "Final: Galería de las voces",
+          "texto": "En la cueva las paredes devuelven las voces de otros exploradores que pasaron hace siglos. Grabás horas de ecos y volvés convencida de que el cerro guarda memoria.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "jardin-de-los-relojes",
+      "titulo": "El jardín de los relojes",
+      "estado": "PUBLICADA",
+      "admin": "admin2",
+      "creada": "2026-09-25T12:00:00",
+      "categorias": ["Fantasía", "Misterio"],
+      "sinopsis": "Detrás de la casa de tu abuela hay una puerta que da a un jardín donde los relojes crecen como flores. Cada uno marca un momento de tu vida, y uno late más fuerte que los demás.",
+      "capitulos": [
+        {
+          "clave": "jardin-inicio",
+          "titulo": "Una puerta entre las hortensias",
+          "texto": "En el fondo de la casa de tu abuela encontrás una puerta que da a un jardín donde los relojes crecen como flores. Cada uno marca un momento distinto de tu vida, y uno late más fuerte que el resto.",
+          "opciones": [
+            { "texto": "Arrancar el reloj que late más fuerte", "destino": "jardin-arrancado" },
+            { "texto": "Regar los relojes con la regadera de la abuela", "destino": "jardin-agua" }
+          ]
+        },
+        {
+          "clave": "jardin-arrancado",
+          "titulo": "El reloj arrancado",
+          "texto": "Al arrancarlo el jardín se queda sin viento y los demás relojes se detienen de a uno. El tuyo marca la hora exacta de un día que nunca te animaste a recordar.",
+          "opciones": [
+            { "texto": "Dar cuerda y mirar ese día", "destino": "jardin-final-dia" }
+          ]
+        },
+        {
+          "clave": "jardin-agua",
+          "titulo": "Agua para el tiempo",
+          "texto": "Los relojes florecen y largan notas de música de cuerda. Un caracol de oro te avisa que uno de ellos está enfermo y que solo vos podés curarlo.",
+          "opciones": [
+            { "texto": "Seguir al caracol hasta el reloj enfermo", "destino": "jardin-final-jardinero" }
+          ]
+        },
+        {
+          "clave": "jardin-final-dia",
+          "titulo": "Final: El día que faltaba",
+          "texto": "Ves una tarde de verano que habías olvidado, con tu abuela riéndose y vos de chico corriendo descalzo. Cuando salís del jardín la puerta ya no está, pero la risa te acompaña.",
+          "final": true
+        },
+        {
+          "clave": "jardin-final-jardinero",
+          "titulo": "Final: Jardinero del tiempo",
+          "texto": "Curás el reloj con unas gotas de agua y una canción que tu abuela te enseñó. El jardín te nombra jardinero, y desde entonces cada primavera aparece una puerta nueva entre las hortensias.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "robot-se-jubila",
+      "titulo": "Don Robot se jubila",
+      "estado": "PUBLICADA",
+      "admin": "admin1",
+      "creada": "2026-10-05T14:30:00",
+      "categorias": ["Ciencia ficción", "Humor"],
+      "sinopsis": "Sos el robot de mantenimiento de una estación de trenes y hoy es tu último turno antes de la jubilación. Entre una fuga de vapor, un aprendiz nervioso y un discurso larguísimo, vas a tener que decidir cómo despedirte del oficio.",
+      "capitulos": [
+        {
+          "clave": "robot-inicio",
+          "titulo": "El último turno",
+          "texto": "Hoy es tu último turno antes de la jubilación, pero en la sala de máquinas hay una fuga de vapor. Por los altavoces anuncian que el intendente de la estación viene a darte una medalla.",
+          "opciones": [
+            { "texto": "Arreglar la fuga antes que nada", "destino": "robot-llave" },
+            { "texto": "Recibir la medalla y dejar la fuga para después", "destino": "robot-final-medalla" }
+          ]
+        },
+        {
+          "clave": "robot-llave",
+          "titulo": "Llave inglesa de despedida",
+          "texto": "Mientras ajustás la tubería, tus engranajes crujen y sentís que alguien te mira desde la escalera: es el aprendiz, un robot nuevo y nervioso. Te pregunta si podés enseñarle el último secreto del oficio.",
+          "opciones": [
+            { "texto": "Enseñarle el truco del golpecito en la válvula", "destino": "robot-final-herencia" },
+            { "texto": "Guardarte el secreto y salir silbando", "destino": "robot-final-silbidos" }
+          ]
+        },
+        {
+          "clave": "robot-final-herencia",
+          "titulo": "Final: La herencia de la llave",
+          "texto": "El aprendiz golpea la válvula y todo el sistema vuelve a funcionar al instante. El intendente lee un discurso larguísimo, recibís la medalla y te vas a descansar a una plaza con una lata de aceite.",
+          "final": true
+        },
+        {
+          "clave": "robot-final-silbidos",
+          "titulo": "Final: Silbidos y secretos",
+          "texto": "Salís de la estación con tu secreto y una sonrisa de metal. A los dos días te llaman de vuelta por una emergencia, y aceptás volver con tarifa de consultor y un moño de regalo.",
+          "final": true
+        },
+        {
+          "clave": "robot-final-medalla",
+          "titulo": "Final: Medalla bajo el vapor",
+          "texto": "La ceremonia se hace dentro de una nube de vapor y el intendente termina empapado. Te dan la medalla igual, pero tu jubilación empieza con una orden de limpiar oficinas.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "biblioteca-bajo-el-agua",
+      "titulo": "La biblioteca bajo el agua",
+      "estado": "BORRADOR",
+      "admin": "admin2",
+      "creada": "2026-10-18T10:00:00",
+      "categorias": ["Misterio", "Exploración"],
+      "sinopsis": "Una crecida deja al descubierto una escalera en el sótano de un viejo club, y al final hay una biblioteca entera bajo el agua. Entre libros flotantes y un registro que predice el futuro, vas a decidir qué descubrir y qué dejar donde está.",
+      "capitulos": [
+        {
+          "clave": "biblio-inicio",
+          "titulo": "El sótano inundado",
+          "texto": "Una crecida dejó al descubierto una escalera en el sótano del viejo club y bajás con casco y linterna. Abajo hay una biblioteca entera bajo el agua, con libros que flotan abiertos como pájaros.",
+          "opciones": [
+            { "texto": "Nadar hasta el escritorio del fondo", "destino": "biblio-escritorio" },
+            { "texto": "Sacar los libros más cercanos y volver rápido", "destino": "biblio-final-libros" }
+          ]
+        },
+        {
+          "clave": "biblio-escritorio",
+          "titulo": "El escritorio del bibliotecario",
+          "texto": "Sobre el escritorio hay un registro con una última anotación fechada mañana. A su lado, una llave de bronce con una etiqueta que dice «no abrir hasta la próxima crecida».",
+          "opciones": [
+            { "texto": "Usar la llave en el cajón sellado", "destino": "biblio-final-cajon" },
+            { "texto": "Dejar la llave y copiar el registro", "destino": "biblio-final-tinta" }
+          ]
+        },
+        {
+          "clave": "biblio-final-cajon",
+          "titulo": "Final: El cajón sellado",
+          "texto": "Adentro hay un mapa de túneles que conectan todos los sótanos del barrio. Lo guardás con cuidado, sabiendo que hay mucho más para explorar.",
+          "final": true
+        },
+        {
+          "clave": "biblio-final-tinta",
+          "titulo": "Final: Tinta que no se borra",
+          "texto": "Copiás el registro línea por línea y descubrís que las anotaciones predicen la crecida de cada año. Volvés a la superficie con una advertencia que va a salvar más de un sótano.",
+          "final": true
+        },
+        {
+          "clave": "biblio-final-libros",
+          "titulo": "Final: Libros mojados",
+          "texto": "Salvás una docena de libros y los secás al sol con piedras sobre las hojas. Entre ellos hay uno con tu apellido en la tapa, pero nunca más conseguís bajar de nuevo.",
+          "final": true
+        }
+      ]
+    },
+    {
+      "clave": "feria-de-los-espejos",
+      "titulo": "La feria de los espejos",
+      "estado": "BORRADOR",
+      "admin": "admin1",
+      "creada": "2026-11-02T18:20:00",
+      "categorias": ["Leyendas urbanas"],
+      "sinopsis": "Cada tanto, una feria de espejos aparece de noche en un baldío del barrio y solo se ve cuando la luna está baja. Esta vez las luces están encendidas, y un reflejo te hace señas para que te acerques.",
+      "capitulos": [
+        {
+          "clave": "feria-inicio",
+          "titulo": "La feria que llega de noche",
+          "texto": "Cada tanto, una feria de espejos aparece en el baldío del barrio, y los vecinos dicen que solo se ve cuando la luna está baja. Esta noche las luces están encendidas y, en uno de los espejos, tu reflejo te hace señas para que te acerques.",
+          "opciones": []
+        }
+      ]
+    }
+  ],
+  "ediciones": [
+    {
+      "historia": "faro-que-no-se-apaga",
+      "admin": "admin1",
+      "fecha": "2026-07-20T09:45:00"
+    },
+    {
+      "historia": "casa-calle-sauce",
+      "admin": "admin2",
+      "fecha": "2026-09-01T11:00:00"
+    },
+    {
+      "historia": "cerro-del-eco",
+      "admin": "admin1",
+      "fecha": "2026-10-12T16:20:00"
+    }
+  ],
+  "bajas": [
+    {
+      "titulo": "El señor de las nubes de cartón",
+      "admin": "admin2",
+      "creada": "2026-08-14T09:30:00",
+      "baja": "2026-10-02T16:45:00"
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Obligatorio Programación 3 - Escoge tu propia aventura</title>
+<style>
+  @page { size: A4; margin: 20mm 18mm 18mm 18mm;
+    @bottom-center { content: counter(page); font: 9pt Arial, sans-serif; color: #555; } }
+  @page portada { @bottom-center { content: none; } }
+  @page apaisada { size: A4 landscape; margin: 14mm 14mm 14mm 14mm; }
+  body { font: 10.5pt/1.45 "Segoe UI", Arial, sans-serif; color: #1c1c1c; }
+  h1 { font-size: 26pt; line-height: 1.15; margin: 0 0 6mm; }
+  h2 { font-size: 17pt; color: #1b4f8a; border-bottom: 1.5px solid #1b4f8a; padding-bottom: 2mm; margin: 0 0 5mm; break-before: page; }
+  h3 { font-size: 13pt; color: #1b4f8a; margin: 7mm 0 2.5mm; break-after: avoid; }
+  h4 { font-size: 11pt; margin: 5mm 0 1.5mm; break-after: avoid; }
+  p { margin: 0 0 2.5mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1mm; }
+  a { color: #1b4f8a; }
+  code { font: 9.5pt Consolas, monospace; background: #f1f1f1; padding: 0 2px; }
+  pre { font: 8.5pt/1.35 Consolas, monospace; background: #f5f5f5; border: 1px solid #ddd; padding: 3mm; white-space: pre-wrap; }
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 5mm; font-size: 9.5pt; }
+  th { background: #1b4f8a; color: #fff; text-align: left; }
+  th, td { border: 1px solid #bbb; padding: 1mm 2mm; vertical-align: top; }
+  tr { break-inside: avoid; }
+  thead { display: table-header-group; }
+  .ficha th { width: 28%; background: #e8eef6; color: #1c1c1c; font-weight: 600; }
+  .pendiente, .vacia { background: #fff2b3; color: #6b5300; }
+  .portada { page: portada; text-align: center; padding-top: 30mm; }
+  .portada .sub { font-size: 14pt; color: #444; margin-bottom: 12mm; }
+  .integrantes { display: flex; justify-content: center; gap: 10mm; margin-top: 14mm; }
+  .integrante { width: 74mm; }
+  .foto { width: 40mm; height: 50mm; object-fit: cover; margin: 0 auto 3mm; display: block; }
+  div.foto, div.captura { display: flex; align-items: center; justify-content: center; font-size: 9pt; text-align: center; border: 1px dashed #b89b00; }
+  div.foto.en-blanco { border: 1px solid #888; }
+  .linea { display: inline-block; width: 34mm; border-bottom: 1px solid #555; }
+  .captura { max-width: 100%; display: block; margin: 3mm 0; }
+  div.captura { height: 45mm; }
+  .indice { list-style: none; padding: 0; }
+  .indice li { margin: 0; break-inside: avoid; }
+  .indice a { display: flex; justify-content: space-between; text-decoration: none; color: inherit; padding: .35mm 0; border-bottom: 1px dotted #aaa; }
+  .indice .n2 { font-weight: 600; margin-top: 1.2mm; font-size: 10pt; }
+  .indice .n3 { padding-left: 6mm; font-size: 9pt; }
+  .apaisada { page: apaisada; break-before: page; }
+  .apaisada h3 { margin-top: 0; }
+  .apaisada h2 { break-before: auto; }
+  figure { margin: 2mm 0; text-align: center; }
+  figure img { max-width: 100%; }
+  .apaisada figure img { max-height: 158mm; }
+  figcaption { font-size: 9pt; color: #555; margin-top: 1.5mm; }
+  .nota { background: #eef3f9; border-left: 3px solid #1b4f8a; padding: 2mm 3mm; margin: 3mm 0; }
+</style>
+</head>
+<body>
+
+<section class="portada">
+  <h1>Escoge tu propia aventura</h1>
+  <p class="sub">Obligatorio de Programación 3<br>Facultad de Ingeniería, Universidad ORT Uruguay</p>
+  <p>Grupo: {{grupo}}</p>
+  <div class="integrantes">{{integrantes}}</div>
+  <p style="margin-top: 16mm">Noviembre de 2026</p>
+</section>
+
+<section style="break-before: page">
+  <h1 style="font-size: 17pt; color: #1b4f8a">Tabla de contenido</h1>
+  <ol class="indice">{{indice}}</ol>
+</section>
+
+<h2>Presentación del sistema</h2>
+<p>El sistema permite publicar y leer historias interactivas, en las que cada lector elige cómo sigue la trama hasta llegar a uno de los finales posibles. Está formado por dos soluciones independientes que comparten las bibliotecas de clases:</p>
+<table>
+  <thead><tr><th>Solución</th><th>Proyectos</th><th>Función</th></tr></thead>
+  <tbody>
+    <tr><td><code>Administracion.slnx</code></td><td><code>Obligatorio</code>, <code>Dominio</code>, <code>Aplicacion</code>, <code>Infraestructura</code></td><td>Aplicación MVC de administración: usuarios, historias, capítulos y auditoría.</td></tr>
+    <tr><td><code>Lectura.slnx</code></td><td><code>Obligatorio.WebApi</code>, <code>Obligatorio.Lector</code>, <code>Dominio</code>, <code>Aplicacion</code>, <code>Infraestructura</code></td><td>Web API con JWT y su cliente MVC: lectura, historial, métricas y estilo.</td></tr>
+  </tbody>
+</table>
+<h3>Enlaces</h3>
+<table class="ficha">
+  <tr><th>Administración (Somee)</th><td>{{url_administracion}}</td></tr>
+  <tr><th>Lectura (Somee)</th><td>{{url_lectura}}</td></tr>
+  <tr><th>Web API y Swagger (Somee)</th><td>{{url_api}}</td></tr>
+  <tr><th>Repositorio en GitHub</th><td>{{url_github}}</td></tr>
+</table>
+<h3>Numeración de los requerimientos</h3>
+<p>La sección de documentación de la consigna cita algunos requerimientos con otro número (por ejemplo, RF06 para Lectura de historia). En este informe se usa la numeración de la descripción de los requerimientos: RF07 Lectura, RF08 Historial, RF09 Ranking de historias y RF12 Estilos.</p>
+
+<h2>Diagrama de casos de uso</h2>
+<figure><img src="img/casos-de-uso.png" alt="Diagrama de casos de uso de todo el sistema" style="max-height: 222mm"><figcaption>Casos de uso de las dos aplicaciones del sistema.</figcaption></figure>
+
+<h2>Descripción narrativa de casos de uso</h2>
+
+<h3>Lectura de historia (RF07)</h3>
+<table class="ficha">
+  <tr><th>Actor principal</th><td>Usuario con rol lector.</td></tr>
+  <tr><th>Objetivo</th><td>Recorrer una historia publicada eligiendo opciones hasta llegar a un final, que queda registrado.</td></tr>
+  <tr><th>Precondiciones</th><td>El usuario inició sesión y existe al menos una historia publicada.</td></tr>
+  <tr><th>Poscondiciones</th><td>Queda registrada una lectura con su capítulo actual. Si se llegó a un final, también quedan la fecha de finalización y el final alcanzado.</td></tr>
+</table>
+<h4>Flujo principal</h4>
+<table>
+  <thead><tr><th style="width: 7%">Paso</th><th style="width: 40%">Usuario</th><th>Sistema</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Ingresa a Historias.</td><td>Muestra las historias publicadas y las categorías para filtrar.</td></tr>
+    <tr><td>2</td><td>Opcionalmente, elige una categoría y filtra.</td><td>Muestra solo las historias publicadas de esa categoría.</td></tr>
+    <tr><td>3</td><td>Elige Comenzar lectura en una historia.</td><td>Crea una lectura nueva, ubicada en el capítulo inicial, con la fecha actual.</td></tr>
+    <tr><td>4</td><td></td><td>Muestra el título y el texto del capítulo, y sus opciones.</td></tr>
+    <tr><td>5</td><td>Elige una opción.</td><td>Comprueba que pertenezca al capítulo actual y avanza al capítulo de destino.</td></tr>
+    <tr><td>6</td><td></td><td>Si el destino es intermedio, vuelve al paso 4.</td></tr>
+    <tr><td>7</td><td></td><td>Si el destino es un final, registra la fecha de finalización y el final alcanzado, y muestra el capítulo final con la opción de iniciar una nueva lectura.</td></tr>
+  </tbody>
+</table>
+<h4>Flujos alternativos</h4>
+<table>
+  <thead><tr><th style="width: 9%">Paso</th><th style="width: 40%">Condición</th><th>Respuesta del sistema</th></tr></thead>
+  <tbody>
+    <tr><td>1a</td><td>No hay historias para el filtro elegido.</td><td>Informa: «No hay historias publicadas para mostrar con ese filtro.»</td></tr>
+    <tr><td>3a</td><td>La historia no existe.</td><td>Informa: «La historia no existe.» La API responde 404.</td></tr>
+    <tr><td>3b</td><td>La historia dejó de estar publicada.</td><td>Informa: «Solo se pueden leer historias publicadas.» La API responde 400.</td></tr>
+    <tr><td>4a</td><td>La lectura no existe o es de otro usuario.</td><td>Informa: «La lectura no existe o no pertenece al usuario.» La API responde 404.</td></tr>
+    <tr><td>5a</td><td>La opción no pertenece al capítulo actual.</td><td>Informa: «La opción seleccionada no pertenece al capítulo actual.» La API responde 400.</td></tr>
+    <tr><td>5b</td><td>La lectura ya había finalizado.</td><td>Informa: «La lectura ya finalizó. Debe iniciar una nueva.» La API responde 400.</td></tr>
+    <tr><td>7a</td><td>El usuario quiere probar otro camino.</td><td>Elige Iniciar una nueva lectura y vuelve al paso 3. La lectura anterior no cambia.</td></tr>
+    <tr><td>*a</td><td>La sesión venció o el token no es válido.</td><td>La API responde 401 y la aplicación vuelve al inicio de sesión.</td></tr>
+    <tr><td>*b</td><td>Un administrador intenta leer.</td><td>La API responde 403 y la aplicación informa que no tiene permisos.</td></tr>
+    <tr><td>*c</td><td>La API no está disponible.</td><td>Informa: «No se pudo conectar con la API.»</td></tr>
+  </tbody>
+</table>
+
+<h3>Historial de lecturas (RF08)</h3>
+<table class="ficha">
+  <tr><th>Actor principal</th><td>Usuario con rol lector.</td></tr>
+  <tr><th>Objetivo</th><td>Consultar las lecturas propias iniciadas en un mes y año, con su estado y el final alcanzado.</td></tr>
+  <tr><th>Precondiciones</th><td>El usuario inició sesión.</td></tr>
+  <tr><th>Poscondiciones</th><td>No se modifica ningún dato.</td></tr>
+</table>
+<h4>Flujo principal</h4>
+<table>
+  <thead><tr><th style="width: 7%">Paso</th><th style="width: 40%">Usuario</th><th>Sistema</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Ingresa a Mi historial.</td><td>Selecciona el mes y el año actuales, y muestra las lecturas de ese período.</td></tr>
+    <tr><td>2</td><td>Elige otro mes y año, y busca.</td><td>Busca solo las lecturas de ese usuario iniciadas en ese período.</td></tr>
+    <tr><td>3</td><td></td><td>Muestra, de la más reciente a la más antigua: historia, fecha de inicio, estado, fecha de finalización y final alcanzado.</td></tr>
+    <tr><td>4</td><td>Opcionalmente, elige Continuar en una lectura en curso.</td><td>Muestra el capítulo donde había quedado (continúa en el caso de uso Lectura de historia, paso 4).</td></tr>
+  </tbody>
+</table>
+<h4>Flujos alternativos</h4>
+<table>
+  <thead><tr><th style="width: 9%">Paso</th><th style="width: 40%">Condición</th><th>Respuesta del sistema</th></tr></thead>
+  <tbody>
+    <tr><td>2a</td><td>No hay lecturas en el período.</td><td>Informa: «No existen lecturas para el mes y año seleccionados.» La API responde 200 con una lista vacía.</td></tr>
+    <tr><td>2b</td><td>El mes no está entre 1 y 12.</td><td>Informa: «El mes debe estar entre 1 y 12.» La API responde 400.</td></tr>
+    <tr><td>2c</td><td>El año no es válido.</td><td>Informa: «El año ingresado no es válido.» La API responde 400.</td></tr>
+    <tr><td>*a</td><td>La sesión venció o el token no es válido.</td><td>La API responde 401 y la aplicación vuelve al inicio de sesión.</td></tr>
+    <tr><td>*b</td><td>Un administrador intenta consultar.</td><td>La API responde 403 y la aplicación informa que no tiene permisos.</td></tr>
+  </tbody>
+</table>
+
+<h2>Casos de prueba: ranking de historias más leídas (RF09)</h2>
+<p>Requerimiento: listado de historias ordenado por cantidad de lecturas completadas, de mayor a menor, sin las historias nunca leídas. Solo para administradores. Se usa diseño de caja negra, con clases de equivalencia sobre el estado de las lecturas y valores límite sobre la cantidad.</p>
+<p>Se prueba con <code>GET /api/Metricas/ranking-historias</code> y con la pantalla Historias más leídas de la aplicación de lectura. Estos casos se ejecutaron de forma automatizada contra la aplicación en funcionamiento y dieron el resultado esperado.</p>
+<h3>Clases de equivalencia</h3>
+<table>
+  <thead><tr><th style="width: 34%">Condición</th><th>Clases válidas: la historia aparece</th><th>Clases inválidas: la historia no aparece</th></tr></thead>
+  <tbody>
+    <tr><td>Lecturas de la historia</td><td>C1: al menos una completada.</td><td>C2: ninguna lectura. C3: solo lecturas en curso.</td></tr>
+    <tr><td>Rol del solicitante</td><td>C4: administrador.</td><td>C5: lector (403). C6: sin autenticar (401).</td></tr>
+  </tbody>
+</table>
+<h3>Casos de prueba</h3>
+<table>
+  <thead><tr><th style="width: 7%">Id</th><th style="width: 24%">Caso</th><th style="width: 37%">Datos de entrada</th><th>Resultado esperado</th></tr></thead>
+  <tbody>
+    <tr><td>CP01</td><td>Sin lecturas completadas</td><td>Base con historias publicadas y ninguna lectura.</td><td>API: 200 y lista vacía. Pantalla: «Todavía no hay lecturas completadas.»</td></tr>
+    <tr><td>CP02</td><td>Historia nunca leída (C2)</td><td>Delta sin lecturas y Alfa con 1 completada.</td><td>Aparece solo Alfa.</td></tr>
+    <tr><td>CP03</td><td>Solo lecturas en curso (C3)</td><td>Gama con 1 lectura sin terminar y Alfa con 1 completada.</td><td>Gama no aparece.</td></tr>
+    <tr><td>CP04</td><td>Mínimo: una completada (C1)</td><td>Alfa con exactamente 1 completada.</td><td>Alfa aparece con cantidad 1.</td></tr>
+    <tr><td>CP05</td><td>Orden descendente</td><td>Alfa con 4 y Beta con 2.</td><td>Alfa, Beta.</td></tr>
+    <tr><td>CP06</td><td>Empate</td><td>Beta con 2 y Epsilon con 2.</td><td>Ambas con 2, ordenadas alfabéticamente: Beta, Epsilon.</td></tr>
+    <tr><td>CP07</td><td>Completadas y en curso juntas</td><td>Alfa con 4 completadas y 1 en curso.</td><td>Alfa aparece con cantidad 4.</td></tr>
+    <tr><td>CP08</td><td>El mismo usuario repite</td><td>Un usuario completa Alfa 2 veces.</td><td>Cuentan las 2 lecturas: se cuentan lecturas, no usuarios.</td></tr>
+    <tr><td>CP09</td><td>Se actualiza con el uso</td><td>Ranking vacío; un lector completa una historia.</td><td>La historia pasa a aparecer con cantidad 1.</td></tr>
+    <tr><td>CP10</td><td>Solicitante lector (C5)</td><td>GET con token de lector.</td><td>403. La pantalla informa que no tiene permisos.</td></tr>
+    <tr><td>CP11</td><td>Sin autenticar (C6)</td><td>GET sin token.</td><td>401. La pantalla lleva al inicio de sesión.</td></tr>
+  </tbody>
+</table>
+
+<h2>Diagramas de clases</h2>
+<p>Los diagramas se hicieron con PlantUML online y se incluyen como capturas de pantalla. Los atributos y operaciones se generan leyendo el código, por lo que coinciden con lo implementado. Se incluye completa la lógica de negocio (Dominio y Aplicación) y, para las demás capas, las clases que participan en Lectura de historia, sin las vistas MVC.</p>
+<p>Respecto al diseño de las pre-entregas, las veces que se alcanzó un final ya no se guardan en <code>CapituloFinal</code>: se cuentan desde las lecturas, para no mantener el mismo dato en dos lugares.</p>
+
+<section class="apaisada">
+<h3>Dominio: entidades</h3>
+<figure><img src="img/dominio-entidades.png" alt="Entidades del dominio"></figure>
+</section>
+<section class="apaisada">
+<h3>Dominio: repositorios y consultas</h3>
+<figure><img src="img/dominio-repositorios.png" alt="Interfaces de repositorio y consultas" style="max-height: 120mm"></figure>
+</section>
+<section class="apaisada">
+<h3>Dominio: excepciones</h3>
+<figure><img src="img/dominio-excepciones.png" alt="Jerarquía de excepciones" style="max-height: 140mm"></figure>
+</section>
+<section class="apaisada">
+<h3>Aplicación: servicios</h3>
+<figure><img src="img/aplicacion-servicios.png" alt="Servicios de aplicación"></figure>
+<h4>Dependencias de los servicios con los repositorios</h4>
+<figure><img src="img/aplicacion-dependencias.png" alt="Dependencias de los servicios" style="max-height: 35mm"></figure>
+</section>
+<section class="apaisada">
+<h3>Aplicación: DTOs</h3>
+<figure><img src="img/aplicacion-dtos.png" alt="DTOs de aplicación"></figure>
+</section>
+<section class="apaisada">
+<h3>Aplicación: mappers</h3>
+<figure><img src="img/aplicacion-mappers.png" alt="Mappers de aplicación" style="max-height: 70mm"></figure>
+</section>
+<section class="apaisada">
+<h3>Lectura de historia: MVC y Web API</h3>
+<figure><img src="img/lectura-presentacion.png" alt="Clases de MVC y Web API en Lectura de historia"></figure>
+</section>
+<section class="apaisada">
+<h3>Lectura de historia: aplicación</h3>
+<figure><img src="img/lectura-aplicacion.png" alt="Clases de aplicación en Lectura de historia"></figure>
+</section>
+<section class="apaisada">
+<h3>Lectura de historia: repositorios e infraestructura</h3>
+<figure><img src="img/lectura-infraestructura.png" alt="Repositorios e infraestructura en Lectura de historia" style="max-height: 95mm"></figure>
+</section>
+
+<h2>Generación de datos de prueba con IA generativa</h2>
+<p>Las historias, capítulos, opciones y finales de la precarga, junto con los usuarios y las lecturas de prueba, se generaron con ayuda de IA generativa.</p>
+<table class="ficha">
+  <tr><th>Herramienta y modelo</th><td>{{ia_herramienta}}</td></tr>
+  <tr><th>Secuencia de prompts</th><td>{{ia_link}}</td></tr>
+</table>
+<h3>Captura de la conversación</h3>
+{{ia_captura}}
+<h3>Prompts utilizados</h3>
+{{prompts}}
+<h3>Del resultado de la IA al script</h3>
+<p>La IA devuelve dos archivos JSON. <code>BaseDeDatos/generador/generar_script.py</code> los valida y arma <code>BaseDeDatos/Obligatorio.sql</code>, que contiene el esquema y los inserts. En ese script, los comentarios separan la precarga generada con IA de los datos que surgen del uso. Los Id los genera la base de datos: cada Id nuevo se guarda con <code>SCOPE_IDENTITY()</code> y se reutiliza en las claves foráneas.</p>
+<h3>Controles</h3>
+<ul>
+  <li>Antes de generar el script se validan largos, emails, contraseñas, roles, que los caminos de cada historia formen un árbol, las reglas de publicación, que solo los lectores lean historias publicadas, y el mínimo de 10 filas por tabla.</li>
+  <li>Sobre la base creada se comprobó que todos los usuarios inician sesión, que las métricas coinciden con las calculadas desde los archivos y que se puede llegar a todos los finales de las historias publicadas.</li>
+</ul>
+<h3>Filas por tabla</h3>
+{{tabla_filas}}
+<h3>Datos para probar las métricas</h3>
+<h4>RF09: historias más leídas</h4>
+{{tabla_ranking_historias}}
+<h4>RF10: finales alcanzados por historia</h4>
+{{tabla_finales}}
+<h4>RF11: usuarios con más historias leídas</h4>
+{{tabla_ranking_usuarios}}
+
+<h2>Investigación para la selección de estilos (RF12)</h2>
+{{investigacion_estilos}}
+
+</body>
+</html>

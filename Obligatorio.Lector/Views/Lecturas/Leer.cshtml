@@ -1,0 +1,101 @@
+@model LecturaDetalleViewModel
+
+@{
+    ViewData["Title"] = "Leer historia";
+}
+
+<div class="container mt-4">
+    <a asp-controller="Lecturas"
+       asp-action="Historias"
+       class="btn btn-outline-secondary mb-4">
+        Volver a historias
+    </a>
+
+    <div class="card shadow">
+        <div class="card-body p-4">
+
+            <h2>@Model.HistoriaTitulo</h2>
+            <hr />
+
+            <h3>@Model.CapituloActual.Titulo</h3>
+
+            <p class="lead"
+               style="white-space: pre-line;">
+                @Model.CapituloActual.Texto
+            </p>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
+
+            @if (Model.CapituloActual.EsFinal)
+            {
+                <div class="alert alert-success mt-4">
+                    <h4>¡Terminaste la historia!</h4>
+                    <p class="mb-0">
+                        Para intentar otro camino tenés que
+                        iniciar una nueva lectura.
+                    </p>
+                </div>
+
+                <div class="d-flex gap-2 flex-wrap">
+                    <form asp-controller="Lecturas"
+                          asp-action="Iniciar"
+                          method="post">
+
+                        <input type="hidden"
+                               name="historiaId"
+                               value="@Model.HistoriaId" />
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Iniciar una nueva lectura
+                        </button>
+                    </form>
+
+                    <a asp-controller="Lecturas"
+                       asp-action="Historias"
+                       class="btn btn-outline-primary">
+                        Explorar otras historias
+                    </a>
+                </div>
+            }
+            else if (Model.CapituloActual.Opciones.Any())
+            {
+                <h4 class="mt-4">¿Qué querés hacer?</h4>
+
+                @foreach (var opcion in Model.CapituloActual.Opciones)
+                {
+                    <form asp-controller="Lecturas"
+                          asp-action="Avanzar"
+                          method="post"
+                          class="mb-2">
+
+                        <input type="hidden"
+                               name="lecturaId"
+                               value="@Model.Id" />
+
+                        <input type="hidden"
+                               name="opcionId"
+                               value="@opcion.Id" />
+
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            @opcion.Texto
+                        </button>
+                    </form>
+                }
+            }
+            else
+            {
+                <div class="alert alert-warning mt-4">
+                    Este capítulo no tiene opciones
+                    disponibles para continuar.
+                </div>
+            }
+        </div>
+    </div>
+</div>

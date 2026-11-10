@@ -1,0 +1,66 @@
+@model HistoriaDetalleDTO
+
+@{
+    ViewData["Title"] = "Eliminar historia";
+}
+
+<div class="container mt-4">
+
+    <h2>Eliminar historia</h2>
+
+    <div class="alert alert-warning mt-3">
+        ¿Está seguro que desea eliminar esta historia?
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+
+            <h4 class="card-title">
+                @Model.Titulo
+            </h4>
+
+            <p class="card-text">
+                <strong>Sinopsis:</strong>
+                @Model.Sinopsis
+            </p>
+
+            <p class="card-text">
+                <strong>Estado:</strong>
+                @Model.Estado
+            </p>
+
+            <p class="card-text">
+                <strong>Capítulos:</strong>
+                @Model.Capitulos.Count
+            </p>
+
+            <p class="card-text">
+                <strong>Categorías:</strong>
+                @string.Join(", ", Model.Categorias.Select(c => c.Nombre))
+            </p>
+
+        </div>
+    </div>
+
+    <form asp-controller="Historias"
+          asp-action="DeleteConfirmed"
+          method="post">
+
+        <input type="hidden"
+               name="id"
+               value="@Model.Id" />
+
+        <button type="submit"
+                class="btn btn-danger">
+            Eliminar
+        </button>
+
+        <a asp-controller="Historias"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>

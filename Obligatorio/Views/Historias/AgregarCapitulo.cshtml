@@ -1,0 +1,136 @@
+@model CapituloAltaDTO
+
+@{
+    ViewData["Title"] = "Agregar capítulo";
+
+    HistoriaDetalleDTO historia = ViewBag.Historia;
+}
+
+<h2>Agregar capítulo</h2>
+
+<h4>Historia: @historia.Titulo</h4>
+
+<hr />
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<form asp-controller="Historias"
+      asp-action="AgregarCapitulo"
+      method="post">
+
+    <input type="hidden"
+           name="historiaId"
+           value="@historia.Id" />
+
+    <div class="mb-3">
+        <label class="form-label">
+            Capítulo anterior
+        </label>
+
+        <select name="capituloAnteriorId"
+                class="form-select"
+                required>
+
+            <option value="">
+                Seleccione un capítulo
+            </option>
+
+            @foreach (var capitulo in historia.CapitulosIntermedios)
+            {
+                <option value="@capitulo.Id"
+                        selected="@(capitulo.Id == Model.CapituloAnteriorId)">
+                    @capitulo.Titulo
+                </option>
+            }
+
+        </select>
+
+        <small class="text-muted">
+            Solo se pueden agregar capítulos
+            después de capítulos intermedios.
+        </small>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">
+            Tipo de capítulo
+        </label>
+
+        <select name="esFinal"
+                class="form-select"
+                required>
+
+            <option value="false"
+                    selected="@(!Model.EsFinal)">
+                Capítulo intermedio
+            </option>
+
+            <option value="true"
+                    selected="@Model.EsFinal">
+                Capítulo final
+            </option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">
+            Título del capítulo
+        </label>
+
+        <input type="text"
+               name="titulo"
+               value="@Model.Titulo"
+               class="form-control"
+               maxlength="200"
+               required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">
+            Texto del capítulo
+        </label>
+
+        <textarea name="texto"
+                  class="form-control"
+                  rows="6"
+                  required>@Model.Texto</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">
+            Texto de la opción
+        </label>
+
+        <input type="text"
+               name="textoOpcion"
+               value="@Model.TextoOpcion"
+               class="form-control"
+               maxlength="300"
+               required />
+
+        <small class="text-muted">
+            Este texto aparecerá como una opción
+            en el capítulo anterior y conducirá
+            al nuevo capítulo.
+        </small>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">
+        Guardar capítulo
+    </button>
+
+    <a asp-controller="Historias"
+       asp-action="Edit"
+       asp-route-id="@historia.Id"
+       class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

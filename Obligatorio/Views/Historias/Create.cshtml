@@ -1,0 +1,126 @@
+@model HistoriaAltaDTO
+
+@{
+    ViewData["Title"] = "Crear historia";
+    var categorias = ViewBag.Categorias as IEnumerable<CategoriaDTO>
+        ?? Enumerable.Empty<CategoriaDTO>();
+}
+
+<div class="container mt-4">
+
+    <h2>Crear historia</h2>
+
+    <p class="text-muted">
+        Ingrese los datos de la historia y de su capítulo inicial.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    <form asp-controller="Historias"
+          asp-action="Create"
+          method="post">
+
+        <div class="mb-3">
+            <label class="form-label">
+                Título
+            </label>
+
+            <input type="text"
+                   name="titulo"
+                   value="@Model.Titulo"
+                   class="form-control"
+                   maxlength="200"
+                   required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                Sinopsis
+            </label>
+
+            <textarea name="sinopsis"
+                      class="form-control"
+                      rows="4"
+                      maxlength="2000"
+                      required>@Model.Sinopsis</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                Categorías
+            </label>
+
+            @if (!categorias.Any())
+            {
+                <div class="alert alert-warning">
+                    No hay categorías cargadas en el sistema.
+                </div>
+            }
+
+            @foreach (var categoria in categorias)
+            {
+                <div class="form-check">
+
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="categoriasIds"
+                           value="@categoria.Id"
+                           id="categoria_@categoria.Id"
+                           checked="@Model.CategoriasIds.Contains(categoria.Id)" />
+
+                    <label class="form-check-label"
+                           for="categoria_@categoria.Id">
+                        @categoria.Nombre
+                    </label>
+
+                </div>
+            }
+        </div>
+
+        <hr />
+
+        <h4>Capítulo inicial</h4>
+
+        <div class="mb-3">
+            <label class="form-label">
+                Título del capítulo
+            </label>
+
+            <input type="text"
+                   name="tituloCapituloInicial"
+                   value="@Model.TituloCapituloInicial"
+                   class="form-control"
+                   maxlength="200"
+                   required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">
+                Texto del capítulo
+            </label>
+
+            <textarea name="textoCapituloInicial"
+                      class="form-control"
+                      rows="6"
+                      required>@Model.TextoCapituloInicial</textarea>
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary">
+            Crear historia
+        </button>
+
+        <a asp-controller="Historias"
+           asp-action="Index"
+           class="btn btn-secondary">
+            Cancelar
+        </a>
+
+    </form>
+
+</div>

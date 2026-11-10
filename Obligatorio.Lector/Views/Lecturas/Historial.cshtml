@@ -1,0 +1,180 @@
+@model List<LecturaViewModel>
+
+@{
+    ViewData["Title"] = "Mi historial";
+
+    int mesSeleccionado = ViewBag.Mes;
+    int anioSeleccionado = ViewBag.Anio;
+
+    string[] meses = {
+        "Enero", "Febrero", "Marzo", "Abril",
+        "Mayo", "Junio", "Julio", "Agosto",
+        "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    };
+}
+
+<div class="container mt-4">
+
+    <h2>Mi historial de lecturas</h2>
+
+    <p class="text-muted">
+        Consultá las historias que leíste y los finales alcanzados.
+    </p>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+
+            <form asp-controller="Lecturas"
+                  asp-action="Historial"
+                  method="get">
+
+                <div class="row">
+
+                    <div class="col-md-5 mb-3">
+                        <label class="form-label">Mes</label>
+
+                        <select name="mes" class="form-select">
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                if (i == mesSeleccionado)
+                                {
+                                    <option value="@i" selected>
+                                        @meses[i - 1]
+                                    </option>
+                                }
+                                else
+                                {
+                                    <option value="@i">
+                                        @meses[i - 1]
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-5 mb-3">
+                        <label class="form-label">Año</label>
+
+                        <input type="number"
+                               name="anio"
+                               class="form-control"
+                               value="@anioSeleccionado"
+                               min="1"
+                               max="9999"
+                               required />
+                    </div>
+
+                    <div class="col-md-2 mb-3 d-flex align-items-end">
+                        <button type="submit"
+                                class="btn btn-primary w-100">
+                            Buscar
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+    else if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No existen lecturas para el mes y año seleccionados.
+        </div>
+    }
+    else
+    {
+        <h4 class="mb-3">
+            Lecturas de @meses[mesSeleccionado - 1] de @anioSeleccionado
+        </h4>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Historia</th>
+                        <th>Fecha de inicio</th>
+                        <th>Estado</th>
+                        <th>Fecha de finalización</th>
+                        <th>Final alcanzado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var lectura in Model)
+                    {
+                        <tr>
+                            <td>@lectura.HistoriaTitulo</td>
+
+                            <td>
+                                @lectura.FechaInicio.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+
+                            <td>
+                                @if (lectura.Completada)
+                                {
+                                    <span class="badge bg-success">
+                                        Finalizada
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">
+                                        En curso
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+                                @(lectura.FechaFinalizacion.HasValue
+                                    ? lectura.FechaFinalizacion.Value.ToString("dd/MM/yyyy HH:mm")
+                                    : "-")
+                            </td>
+
+                            <td>
+                                @(string.IsNullOrWhiteSpace(lectura.FinalAlcanzadoTitulo)
+                                    ? "-"
+                                    : lectura.FinalAlcanzadoTitulo)
+                            </td>
+
+                            <td>
+                                @if (!lectura.Completada)
+                                {
+                                    <a asp-controller="Lecturas"
+                                       asp-action="Leer"
+                                       asp-route-id="@lectura.Id"
+                                       class="btn btn-sm btn-primary">
+                                        Continuar
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">
+                                        Completada
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-outline-secondary mt-3">
+        Volver al inicio
+    </a>
+
+</div>

@@ -1,0 +1,64 @@
+@model List<RankingUsuarioViewModel>
+
+@{
+    ViewData["Title"] = "Usuarios con más historias leídas";
+}
+
+<div class="container mt-4">
+
+    <h2>Usuarios con más historias leídas</h2>
+
+    <p class="text-muted">
+        Ordenados por historias distintas leídas hasta un final.
+        Completar la misma historia varias veces cuenta una sola vez.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+    else if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Todavía ningún usuario completó una historia.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Usuario</th>
+                        <th>Nombre completo</th>
+                        <th>Historias completadas</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model[i].NombreUsuario</td>
+                            <td>@Model[i].NombreCompleto</td>
+                            <td>@Model[i].HistoriasCompletadas</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="btn btn-outline-secondary mt-3">
+        Volver al inicio
+    </a>
+
+</div>

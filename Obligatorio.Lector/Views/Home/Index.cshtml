@@ -1,0 +1,196 @@
+@{
+    ViewData["Title"] = "Inicio";
+
+    string? usuario = Context.Session.GetString(ClavesSesion.NombreUsuario);
+    string? rol = Context.Session.GetString(ClavesSesion.Rol);
+    bool estaLogueado = !string.IsNullOrEmpty(
+        Context.Session.GetString(ClavesSesion.Token));
+}
+
+<div class="container mt-5">
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (!estaLogueado)
+    {
+        <div class="text-center">
+            <h1 class="display-5 mb-3">
+                Bienvenido al sistema de lectura
+            </h1>
+
+            <p class="lead">
+                Iniciá sesión para disfrutar de nuestras historias interactivas.
+            </p>
+
+            <a asp-controller="Auth"
+               asp-action="Login"
+               class="btn btn-primary btn-lg mt-3">
+                Iniciar sesión
+            </a>
+        </div>
+    }
+    else if (rol == ClavesSesion.RolAdministrador)
+    {
+        <div class="text-center mb-5">
+            <h1 class="display-5">
+                ¡Bienvenido, @usuario!
+            </h1>
+
+            <p class="lead text-muted">
+                Consultá las métricas de lectura.
+            </p>
+        </div>
+
+        <div class="row justify-content-center g-4">
+
+            <div class="col-md-4">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center p-4">
+
+                        <h3>Historias más leídas</h3>
+
+                        <p>
+                            Ranking de historias
+                            por lecturas completadas.
+                        </p>
+
+                        <a asp-controller="Metricas"
+                           asp-action="RankingHistorias"
+                           class="btn btn-primary">
+                            Ver ranking
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center p-4">
+
+                        <h3>Final más alcanzado</h3>
+
+                        <p>
+                            Cuántas veces se alcanzó
+                            cada final de una historia.
+                        </p>
+
+                        <a asp-controller="Metricas"
+                           asp-action="Finales"
+                           class="btn btn-primary">
+                            Ver finales
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center p-4">
+
+                        <h3>Usuarios más lectores</h3>
+
+                        <p>
+                            Ranking de usuarios por
+                            historias distintas completadas.
+                        </p>
+
+                        <a asp-controller="Metricas"
+                           asp-action="RankingUsuarios"
+                           class="btn btn-primary">
+                            Ver ranking
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="text-center mb-5">
+            <h1 class="display-5">
+                ¡Bienvenido, @usuario!
+            </h1>
+
+            <p class="lead text-muted">
+                Elegí una historia y comenzá tu aventura.
+            </p>
+        </div>
+
+        <div class="row justify-content-center g-4">
+
+            <div class="col-md-4">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center p-4">
+
+                        <h3>Historias disponibles</h3>
+
+                        <p>
+                            Explorá las historias publicadas
+                            y elegí cuál querés leer.
+                        </p>
+
+                        <a asp-controller="Lecturas"
+                           asp-action="Historias"
+                           class="btn btn-primary">
+                            Ver historias
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center p-4">
+
+                        <h3>Mi historial</h3>
+
+                        <p>
+                            Consultá tus lecturas anteriores
+                            y descubrí qué finales alcanzaste.
+                        </p>
+
+                        <a asp-controller="Lecturas"
+                           asp-action="Historial"
+                           class="btn btn-success">
+                            Ver historial
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow h-100">
+                    <div class="card-body text-center p-4">
+
+                        <h3>Estilo de lectura</h3>
+
+                        <p>
+                            Elegí entre fondo claro
+                            y fondo oscuro.
+                        </p>
+
+                        <a asp-controller="Preferencias"
+                           asp-action="Estilo"
+                           class="btn btn-secondary">
+                            Cambiar estilo
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
